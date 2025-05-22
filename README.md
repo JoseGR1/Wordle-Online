@@ -46,7 +46,7 @@ Wordle-Online-main/
 - Express
 - HTML5 + CSS3
 - JavaScript
-- WebSockets (para comunicación en tiempo real, si se habilita)
+- WebSockets
 
 📦 Dependencias
 
