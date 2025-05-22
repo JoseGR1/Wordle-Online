@@ -25,7 +25,7 @@ const palabras = [
 // Middleware
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Almacenamiento de partidas
 const partidas = {};
@@ -110,11 +110,11 @@ class EstadoJuego {
 
 // Rutas
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.get('/game', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/game.html'));
+  res.sendFile(path.join(__dirname, 'public', 'game.html'));
 });
 
 app.post('/crear-partida', (req, res) => {
