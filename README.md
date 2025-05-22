@@ -13,6 +13,7 @@ Una versión en línea multijugador del clásico juego Wordle, construida con No
 
 ## 📁 Estructura del Proyecto
 
+```
 Wordle-Online-main/
 ├── .gitignore
 ├── package.json
@@ -23,21 +24,28 @@ Wordle-Online-main/
     ├── game.html
     ├── scripts.js
     └── styles.css
+```
 
 ## 🚀 Instalación
 
 1. Clona o descarga este repositorio.  
 2. Instala las dependencias usando:
 
+   ```bash
    npm install
+   ```
 
 3. Inicia el servidor:
 
+   ```bash
    node server.js
+   ```
 
 4. Abre tu navegador y visita:
 
+   ```
    http://localhost:3000
+   ```
 
 ## 🛠️ Tecnologías Utilizadas
 
@@ -49,18 +57,7 @@ Wordle-Online-main/
 
 ## 📦 Dependencias
 
-Las dependencias se especifican en package.json. Algunas importantes:
+Las dependencias se especifican en `package.json`. Algunas importantes:
 
 - express  
-- socket.io 
-
-## ✅ Futuras Mejoras
-
-- Implementar autenticación de usuarios  
-- Crear salas privadas para partidas  
-- Agregar estadísticas por jugador  
-- Mejorar la experiencia en dispositivos móviles  
-
-## 📄 Licencia
-
-Este proyecto está bajo la licencia MIT. Puedes usarlo, modificarlo y distribuirlo libremente.
+- socket.io  
