@@ -16,11 +16,44 @@ const io = socketIo(server, {
 // Configuración
 const PORT = process.env.PORT || 3000;
 const palabras = [
-  "arbol", "balsa", "canto", "dulce", "estar", "fuego", "grano", "hueso", 
+  "arbol", "balsa", "canto", "dulce", "estar", "fuego", "grano", "hueso",
   "igual", "jugar", "lapiz", "monte", "nuevo", "oscar", "piano", "queso",
   "raton", "saber", "tener", "volar", "yogur", "zorro", "acido", "bello",
-  "cable", "danza", "etapa", "fumar", "girar", "hielo"
+  "cable", "danza", "etapa", "fumar", "girar", "hielo", "verde", "plaza",
+  "poder", "campo", "causa", "hojas", "china", "dicho", "ficha", "pinta",
+  "coche", "coger", "robar", "orden", "angel", "pasto", "letra", "miedo",
+  "cielo", "pista", "rival", "final", "salir", "clave", "traje", "reloj",
+  "dolar", "nieve", "junta", "deuda", "firme", "humor", "llave", "torre",
+  "corte", "actor", "prisa", "gente", "altar", "sello", "pacto", "rumor",
+  "vista", "cruce", "golpe", "acero", "vuelo", "perla", "silla", "besos",
+  "rejas", "digno", "tarta", "fruta", "cerco", "rumbo", "pasar", "sobra",
+  "punta", "arena", "notas", "leche", "vicio", "suena", "razon", "carga",
+  "carro", "guapo", "herir", "libro", "multa", "reino", "vapor", "zarpa",
+  "rodeo", "trama", "pagar", "nacer", "viaje", "jamas", "cosas", "lucha",
+  "pieza", "pobre", "caida", "cuero", "pesar", "helar", "gallo", "cebra",
+  "nariz", "pulga", "largo", "abuso", "muela", "mango", "punto", "andar",
+  "cesta", "papel", "muros", "pared", "manos", "cazar", "cabra", "falda",
+  "gente", "llama", "mitad", "noche", "ojera", "plomo", "quema", "ruina",
+  "sabor", "techo", "unico", "vacas", "wafle", "xenon", "yerba", "zanja",
+  "abrir", "broma", "corte", "decir", "errar", "fallo", "ganar", "huevo",
+  "ideal", "joven", "karma", "limon", "matar", "nieve", "oasis", "pique",
+  "quiso", "robar", "santo", "temor", "union", "valle", "webos", "xilof",
+  "yerno", "zorro", "actor", "beber", "cazar", "dejar", "estar", "feliz",
+  "grasa", "honda", "india", "jaula", "karma", "lleno", "miedo", "nadar",
+  "oliva", "pista", "quema", "rumbo", "salto", "temor", "usaré", "vimos",
+  "whisky", "xenon", "yegua", "zarza", "acera", "batir", "celar", "dados",
+  "echar", "focos", "grito", "hilar", "islas", "jalar", "kilos", "lucir",
+  "matar", "nivel", "oxido", "pedir", "quiso", "regar", "salir", "tejer",
+  "untar", "verbo", "wokas", "xerox", "yerro", "zanja", "aforo", "bueno",
+  "carta", "densa", "epoca", "fecha", "gafas", "hacha", "iglus", "juego",
+  "kappa", "leche", "monto", "noble", "orina", "puros", "queso", "radio",
+  "santa", "tecla", "usaré", "vello", "winco", "xenón", "yemas", "zumba",
+  "aleta", "brisa", "clavo", "doble", "envío", "fiera", "gente", "hongo",
+  "islam", "jarra", "kiwis", "lento", "macho", "nubes", "orden", "primo",
+  "quedo", "rojos", "sello", "torso", "usted", "votos", "wisky", "xiló",
+  "yerro", "zonas"
 ];
+
 
 // Middleware
 app.use(cors());
@@ -145,8 +178,8 @@ app.post('/unirse-partida', (req, res) => {
   const partida = partidas[codigoPartida];
   if (!partida) return res.status(404).json({ error: 'Partida no encontrada' });
 
-  if (partida.jugadores.length >= 3) {
-    return res.status(400).json({ error: 'La partida está llena (máximo 3 jugadores)' });
+  if (partida.jugadores.length >= 5) {
+    return res.status(400).json({ error: 'La partida está llena (máximo 5 jugadores)' });
   }
 
   if (partida.jugadores.some(j => j.nombre === nombreJugador.trim())) {
