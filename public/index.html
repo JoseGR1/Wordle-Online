@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle Multijugador</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .codigo {
+            font-family: monospace;
+            font-size: 1.5em;
+            letter-spacing: 2px;
+            color: #2c3e50;
+            background-color: #f8f9fa;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .jugador-estado {
+            display: flex;
+            align-items: center;
+            margin: 5px 0;
+            padding: 8px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .jugador-progreso {
+            height: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-left: 10px;
+            flex-grow: 1;
+        }
+        .progreso-barra {
+            height: 100%;
+            border-radius: 5px;
+            background-color: #28a745;
+            transition: width 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Wordle Multijugador</h1>
+        
+        <div class="card" id="crear-partida">
+            <h2>Crear Partida</h2>
+            <input type="text" id="nombre-creador" placeholder="Tu nombre" required maxlength="20">
+            <button id="btn-crear">Crear Partida</button>
+            <div id="codigo-container" class="hidden">
+                <p>Código de partida: <span id="codigo-partida" class="codigo"></span></p>
+                <p>Comparte este código con tus amigos</p>
+                
+                <h3>Jugadores conectados:</h3>
+                <div id="jugadores-espera"></div>
+                
+                <div class="estadisticas-container hidden" id="estadisticas-creador">
+                    <h3>Tu progreso:</h3>
+                    <div class="jugador-estado">
+                        <span id="jugador-nombre"></span>
+                        <div class="jugador-progreso">
+                            <div class="progreso-barra" id="jugador-progreso"></div>
+                        </div>
+                        <span id="jugador-porcentaje" style="margin-left: 10px;">0%</span>
+                    </div>
+                </div>
+                
+                <button id="btn-jugar">Ir al Juego</button>
+            </div>
+        </div>
+        
+        <div class="card" id="unirse-partida">
+            <h2>Unirse a Partida</h2>
+            <input type="text" id="nombre-jugador" placeholder="Tu nombre" required maxlength="20">
+            <input type="text" id="codigo-input" placeholder="Código de partida" maxlength="6">
+            <button id="btn-unirse">Unirse</button>
+            <div id="esperando" class="hidden">
+                <p>Esperando al anfitrión...</p>
+                <div id="jugadores-unidos"></div>
+                
+                <div class="estadisticas-container hidden" id="estadisticas-invitado">
+                    <h3>Progreso de jugadores:</h3>
+                    <div id="jugadores-progreso"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="mensaje-error" class="mensaje-error hidden"></div>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="scripts.js"></script>
+</body>
+</html>
