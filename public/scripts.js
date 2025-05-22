@@ -214,6 +214,7 @@ function conectarSocketJuego() {
         actualizarInput(miTurno);
         actualizarTablero(intentos);
         actualizarEstadisticas(estadisticas);
+        actualizarProgresoJugadores(intentos); // ← Añade esta línea
         
         if (feedback && feedback[nombreJugadorActual]) {
             mostrarFeedback(feedback[nombreJugadorActual]);
@@ -353,6 +354,8 @@ function actualizarTablero(intentosPorJugador) {
             }
         }
     }
+    renderizarHistorialJugadores(intentosPorJugador);
+
 }
 
 function mostrarFeedback(feedback) {
@@ -424,6 +427,103 @@ function mostrarResultadoFinal(ganador, palabra, estadisticas) {
             </table>
         `;
     }
+}
+
+function actualizarProgresoJugadores(intentosPorJugador) {
+    const tbody = document.querySelector('#tabla-progreso tbody');
+    if (!tbody) return;
+
+    tbody.innerHTML = Object.entries(intentosPorJugador)
+        .map(([nombre, intentos]) => {
+            // Crear celdas de colores para cada intento
+            const celdas = intentos.map((intento, index) => {
+                if (!intento) {
+                    return `<div class="celda-progreso celda-vacia" title="Intento ${index + 1} vacío"></div>`;
+                }
+
+                const feedback = analizarPalabra(intento, palabraObjetivo);
+                const clases = feedback.map(f => `celda-${f.estado}`).join(' ');
+                
+                return `<div class="celda-progreso ${clases}" title="Intento ${index + 1}: ${intento}"></div>`;
+            }).join('');
+
+            return `
+                <tr>
+                    <td>${nombre}</td>
+                    <td><div class="celdas-progreso">${celdas}</div></td>
+                </tr>
+            `;
+        })
+        .join('');
+}
+
+function renderizarHistorialJugadores(intentosPorJugador) {
+    const container = document.getElementById("historial-jugadores");
+    if (!container) return;
+
+    container.innerHTML = '';
+
+    for (const jugador in intentosPorJugador) {
+        if (jugador === nombreJugadorActual) continue;
+
+        const intentos = intentosPorJugador[jugador];
+        const card = document.createElement("div");
+        card.className = "historial-jugador";
+
+        const titulo = document.createElement("h4");
+        titulo.textContent = jugador;
+        card.appendChild(titulo);
+
+        const tablero = document.createElement("div");
+        tablero.className = "tablero-mini";
+
+        for (let row = 0; row < 6; row++) {
+            const palabra = intentos[row] || "";
+
+            for (let col = 0; col < 5; col++) {
+                const letra = palabra[col] || '';
+                const celda = document.createElement("div");
+                celda.className = "celda-mini";
+
+                if (letra) {
+                    if (letra === palabraObjetivo[col]) {
+                        celda.classList.add("green");
+                    } else if (palabraObjetivo.includes(letra)) {
+                        celda.classList.add("yellow");
+                    } else {
+                        celda.classList.add("gray");
+                    }
+                } else {
+                    celda.classList.add("gray"); // celda vacía → gris
+                }
+
+                tablero.appendChild(celda);
+            }
+        }
+
+        card.appendChild(tablero);
+        container.appendChild(card);
+    }
+}
+
+
+// Función auxiliar para analizar palabra (similar a la del servidor)
+function analizarPalabra(palabra, objetivo) {
+    const resultado = [];
+    const objetivoArray = objetivo.split('');
+    const palabraArray = palabra.split('');
+
+    for (let i = 0; i < 5; i++) {
+        if (palabraArray[i] === objetivoArray[i]) {
+            resultado.push({ estado: 'correcta' });
+        } else if (objetivoArray.includes(palabraArray[i])) {
+            resultado.push({ estado: 'presente' });
+        } else {
+            resultado.push({ estado: 'incorrecta' });
+        }
+    }
+
+    return resultado;
 }
 
 // --------------------------------------------

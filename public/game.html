@@ -7,37 +7,49 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Wordle Multijugador</h1>
-        
-        <div class="info-panel">
-            <p>Partida: <span id="codigo-partida" class="codigo"></span></p>
-            <p>Jugadores: <span id="jugadores-lista"></span></p>
-            <p>Turno de: <span id="turno-actual" class="jugador-activo"></span></p>
+    <div class="layout-juego">
+
+        <!-- LATERAL IZQUIERDO: mini-tableros -->
+        <div id="historial-jugadores" class="historial-jugadores">
+            <!-- Se rellena desde scripts.js -->
         </div>
-        
-        <div id="mensaje-jugador" class="mensaje"></div>
-        
-        <div id="word-grid" class="tablero"></div>
-        
-        <div class="input-area">
-            <input type="text" id="input-palabra" placeholder="Escribe una palabra" maxlength="5" autocomplete="off">
-            <button id="btn-intento">Intentar</button>
-        </div>
-        
-        <div class="estadisticas-flotante" id="estadisticas-juego">
-            <h3>Progreso:</h3>
-            <div id="jugadores-progreso"></div>
-        </div>
-        
-        <div id="resultado-final" class="resultado hidden">
-            <h2 id="mensaje-final"></h2>
-            <p>La palabra era: <span id="palabra-final" class="destacado"></span></p>
-            <div id="tabla-posiciones"></div>
-            <button onclick="volverAlInicio()">Volver al Inicio</button>
+
+        <!-- CONTENIDO CENTRAL -->
+        <div class="container">
+            <h1>Wordle Multijugador</h1>
+
+            <div class="info-panel">
+                <p>Partida: <span id="codigo-partida" class="codigo"></span></p>
+                <p>Jugadores: <span id="jugadores-lista"></span></p>
+                <p>Turno de: <span id="turno-actual" class="jugador-activo"></span></p>
+            </div>
+
+            <div id="mensaje-jugador" class="mensaje"></div>
+
+            <div id="word-grid" class="tablero"></div>
+
+            <div class="input-area">
+                <input type="text" id="input-palabra" placeholder="Escribe una palabra" maxlength="5" autocomplete="off">
+                <button id="btn-intento">Intentar</button>
+            </div>
+
+            <div class="estadisticas-flotante" id="estadisticas-juego">
+                <h3>Progreso:</h3>
+                <div id="jugadores-progreso"></div>
+            </div>
+
+            <!-- POPUP FINAL -->
+            <div id="resultado-final" class="modal-overlay hidden">
+                <div class="modal-content">
+                    <h2 id="mensaje-final"></h2>
+                    <p>La palabra era: <span id="palabra-final" class="destacado"></span></p>
+                    <div id="tabla-posiciones"></div>
+                    <button onclick="volverAlInicio()">Volver al Inicio</button>
+                </div>
+            </div>
         </div>
     </div>
-    
+
     <script src="/socket.io/socket.io.js"></script>
     <script src="scripts.js"></script>
 </body>

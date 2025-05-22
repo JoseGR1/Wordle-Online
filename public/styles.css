@@ -7,20 +7,13 @@ body {
     color: #f1f1f1;
 }
 
-.container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 20px;
-    text-align: center;
+.hidden {
+    display: none !important;
 }
 
 h1, h2, h3 {
     color: #ffffff;
     margin-bottom: 1rem;
-}
-
-.hidden {
-    display: none;
 }
 
 button {
@@ -49,7 +42,24 @@ input[type="text"] {
     max-width: 300px;
 }
 
-/* ======== INDEX: Crear/Unirse ======== */
+.layout-juego {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+
+/* ======== INDEX ======== */
 .card {
     background-color: #1e1e1e;
     border: 1px solid #2c2c2c;
@@ -103,7 +113,7 @@ input[type="text"] {
     margin-top: 10px;
 }
 
-/* ======== GAME: Juego ======== */
+/* ======== GAME ======== */
 .info-panel {
     background-color: #1e1e1e;
     padding: 20px;
@@ -224,4 +234,112 @@ input[type="text"] {
 
 .resultado button:hover {
     background-color: #00796b;
+}
+
+/* ======== HISTORIAL JUGADORES ======== */
+.historial-jugadores {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 20px 10px;
+    min-width: 120px;
+}
+
+.historial-jugador {
+    background-color: #1e1e1e;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+    width: fit-content;
+}
+
+.historial-jugador h4 {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
+
+.tablero-mini {
+    display: grid;
+    grid-template-columns: repeat(5, 16px);
+    gap: 2px;
+    justify-content: center;
+}
+
+.celda-mini {
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+}
+
+.green { background-color: #538d4e; }
+.yellow { background-color: #b59f3b; }
+.gray { background-color: #3a3a3c; }
+
+/* ======== MODAL (RESULTADO FINAL) ======== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+.modal-content {
+    background-color: #222;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    max-width: 500px;
+    width: 90%;
+    text-align: center;
+    color: white;
+    animation: zoomIn 0.3s ease;
+}
+
+.modal-content h2 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+.modal-content .destacado {
+    color: #00e6d8;
+    font-weight: bold;
+}
+
+.modal-content table {
+    width: 100%;
+    margin-top: 20px;
+    border-collapse: collapse;
+}
+
+.modal-content th, .modal-content td {
+    padding: 10px;
+    text-align: center;
+}
+
+.modal-content button {
+    margin-top: 20px;
+    background-color: #00bfa6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.modal-content button:hover {
+    background-color: #009e88;
+}
+
+@keyframes zoomIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
